@@ -35,19 +35,19 @@ Using an 80/20 split with `random_state=42`:
 **Distributions (numeric features)**
 
 <p align="center">
-  <img src="https://github.com/user-attachments/assets/a859b302-9127-44d3-8712-f700f2965248" alt="Feature distributions (histograms)" width="920">
+ <img width="1002" height="498" alt="Screenshot 2025-09-10 at 18 51 40" src="https://github.com/user-attachments/assets/99693990-f548-45f5-9e56-94963c61736a" />
 </p>
 
 **Correlation matrix**
 
 <p align="center">
-  <img src="https://github.com/user-attachments/assets/cb668055-1fa7-4e8a-a4fc-81e108fc07af" alt="Correlation heatmap" width="920">
+  <img width="1002" height="595" alt="Screenshot 2025-09-10 at 18 52 52" src="https://github.com/user-attachments/assets/c4e188c2-635c-4d0d-8e13-44911f8ccf47" />
 </p>
 
 **Geospatial view**
 
 <p align="center">
-  <img src="https://github.com/user-attachments/assets/bc4f343a-1f79-49c5-9f46-a0ebd429c600" alt="Geo scatter colored by median house value" width="920">
+  <img width="1002" height="498" alt="Screenshot 2025-09-10 at 18 53 09" src="https://github.com/user-attachments/assets/36e08f61-45fb-43c0-9280-8759846d11bf" />
 </p>
 
 ---
