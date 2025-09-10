@@ -1,79 +1,141 @@
-House Cost Prediction:
-This repository contains the implementation of a machine learning model to predict housing prices based on various features. 
-The project leverages Python and popular libraries for data analysis, preprocessing, visualization, and machine learning.
+# **House Cost Prediction**
 
+## **Overview**
 
-I) Project Overview
+A practical machine-learning workflow that predicts **median house value** using the classic **California Housing** dataset. The notebook walks through **data loading → cleaning → exploratory data analysis (EDA) → encoding → model training & evaluation** with **Linear Regression** and **Random Forest** baselines.
 
-The House Cost Prediction project aims to estimate the cost of a house using a machine learning model trained on historical data. 
-This project can be a valuable tool for real estate professionals, buyers, and sellers, helping them make informed decisions based on accurate predictions.
+> Notebook: `HouseCostPrediction.ipynb`
+> Data: `housing.csv` (columns include: `longitude`, `latitude`, `housing_median_age`, `total_rooms`, `total_bedrooms`, `population`, `households`, `median_income`, `median_house_value`, `ocean_proximity`)
 
-II) Features
+---
 
- - Data cleaning and preprocessing
+## **Highlights**
 
- - Exploratory data analysis (EDA)
+* **Straightforward preprocessing** — handle missing values; one-hot encode `ocean_proximity`.
+* **EDA first** — distributions, correlations, and a geo scatter to understand location effects.
+* **Two baseline models** — fast, interpretable **Linear Regression** and non-linear **Random Forest Regressor**.
 
- - Feature engineering and selection
+---
 
- - Model training and evaluation
+## **Results (example run)**
 
- - Performance visualization
+Using an 80/20 split with `random_state=42`:
 
- - Exported model for reuse
+| Model             |  R² (test) | RMSE (USD) |
+| ----------------- | ---------: | ---------: |
+| Linear Regression | **\~0.65** |  **≈ 69k** |
+| Random Forest     | **\~0.83** |  **≈ 49k** |
 
-III) Data
+> Numbers will vary slightly with preprocessing choices and seeds; keep this table in sync with the notebook’s final metrics.
 
- - The dataset used for this project contains features such as:
+---
 
- - Number of bedrooms
+## **Exploratory Data Analysis (EDA)**
 
- - Square footage
+**Distributions (numeric features)**
 
- - Location
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/a859b302-9127-44d3-8712-f700f2965248" alt="Feature distributions (histograms)" width="920">
+</p>
 
- - Year built
+**Correlation matrix**
 
- - Amenities
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/cb668055-1fa7-4e8a-a4fc-81e108fc07af" alt="Correlation heatmap" width="920">
+</p>
 
-The data is preprocessed to handle missing values, normalize numerical features, and encode categorical variables.
+**Geospatial view**
 
-IV) Requirements
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/bc4f343a-1f79-49c5-9f46-a0ebd429c600" alt="Geo scatter colored by median house value" width="920">
+</p>
 
-The project is implemented using the following libraries:
+---
 
- - Pandas
+## **Project Structure**
 
- - NumPy
+```
+.
+├─ HouseCostPrediction.ipynb   # end-to-end workflow
+├─ housing.csv                 # California housing dataset
+└─ README.md
+```
 
- - Scikit-learn
+---
 
- - Matplotlib
+## **Environment**
 
- - Seaborn
+* Python 3.9+
+* pandas, numpy
+* scikit-learn
+* matplotlib, seaborn
+* Jupyter
 
-V) Setup
+Quick install:
 
- - Clone the repository:
-    git clone https://github.com/yourusername/HouseCostPrediction.git
-    cd HouseCostPrediction
+```bash
+pip install pandas numpy scikit-learn matplotlib seaborn jupyter
+```
 
- - Create a virtual environment:
-    python -m venv env
-    source env/bin/activate  
+---
 
- - Install the required dependencies:
-    pip install -r requirements.txt
+## **Quick Start**
 
- - Open the Jupyter Notebook:
-    jupyter notebook HouseCostPrediction.ipynb
+```bash
+# 1) Clone and enter
+git clone <your-repo-url>
+cd <repo>
 
-VI) Usage
+# 2) (Optional) create & activate a venv
+python -m venv .venv
+# macOS/Linux
+source .venv/bin/activate
+# Windows
+# .venv\Scripts\activate
 
-Load your dataset in the specified format. Run the Jupyter Notebook cells step-by-step to preprocess data, train the model, and evaluate its performance.
-Modify the hyperparameters and model architecture as needed to improve performance.
+# 3) Install deps
+pip install pandas numpy scikit-learn matplotlib seaborn jupyter
 
-VII) Results
+# 4) Run the notebook
+jupyter notebook HouseCostPrediction.ipynb
+```
 
-The trained model achieves an accuracy of X% (replace with actual result) on the test dataset. 
-Performance metrics and visualizations, including feature importance and residual plots, are included in the notebook.
+---
+
+## **Modeling Details**
+
+* **Preprocessing**
+
+  * Handle missing values (e.g., drop rows with NA in `total_bedrooms` or impute).
+  * One-hot encode `ocean_proximity` with `pd.get_dummies`.
+* **Split**
+
+  * `train_test_split(X, y, test_size=0.2, random_state=42)`
+* **Models**
+
+  * `LinearRegression()`
+  * `RandomForestRegressor(random_state=42)`
+* **Scoring**
+
+  * Primary: **R²**
+  * Also: **RMSE** (`mean_squared_error(..., squared=False)`)
+
+---
+
+## **What You’ll Learn**
+
+* Turning raw tabular data into a **model-ready matrix** (encoding, NA handling).
+* Reading patterns from **EDA visuals**.
+* Comparing **linear** vs. **non-linear** baselines.
+* Reporting results clearly (R², RMSE, plots).
+
+---
+
+## **Roadmap**
+
+* **Imputation & scaling** with a `ColumnTransformer`.
+* **Feature engineering**: `rooms_per_household`, `bedrooms_per_room`, `population_per_household`, interactions with latitude/longitude.
+* **Modeling**: hyperparameter tuning (`GridSearchCV`); try Gradient Boosting / XGBoost / LightGBM.
+* **Evaluation**: k-fold CV, residual analysis, log-transform of target to reduce heteroscedasticity.
+* **Packaging**: export model with `joblib`, add a small `predict.py` or FastAPI endpoint.
+
