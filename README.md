@@ -1,4 +1,4 @@
-# **House Cost Prediction**
+# **California Housing Price Analytics & Prediction**
 
 ## **Overview**
 
